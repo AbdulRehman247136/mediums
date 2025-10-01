@@ -3,6 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
+
 // Root menubar wrapper
 const Menubar = React.forwardRef<
   HTMLDivElement,
@@ -78,7 +79,7 @@ const MenubarContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute right-0 top-full z-50 mt-2 min-w-[12rem] rounded-md border border-border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95",
+        "absolute right-0 top-full z-50 mt-2 w-[12rem] rounded-md border border-border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95",
         className
       )}
       {...props}
@@ -95,7 +96,7 @@ const MenubarItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm font-medium outline-none",
+      "flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5   outline-none",
       "hover:bg-primary-hover hover:text-secondary-foreground",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className

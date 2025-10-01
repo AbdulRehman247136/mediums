@@ -20,7 +20,7 @@ function Navbar({collapsed, setCollapsed}: {collapsed: boolean, setCollapsed: Re
       <div className="flex-1">
         <nav className="flex items-center justify-between bg-white h-16 px-6 border-b-2 border-gray-100">
           {/* ✅ Left Section: Collapse Button + Logo + Search */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-8">
             {/* ✅ Toggle button (no overlap now) */}
             <button
           onClick={() => setCollapsed(!collapsed)}
@@ -33,7 +33,7 @@ function Navbar({collapsed, setCollapsed}: {collapsed: boolean, setCollapsed: Re
             <FaChevronLeft className="w-5 h-5" />
           )}
           <span className="hidden md:block text-sm text-muted-foreground">
-            {collapsed ? "Expand" : "Collapse"}
+            
           </span>
         </button>
        

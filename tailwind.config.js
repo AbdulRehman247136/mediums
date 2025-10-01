@@ -8,7 +8,11 @@ const config = {
     "./src/**/*.{css,scss}", // fixed from ".src" → "./src"
   ],
   theme: {
-    extend: {},
+    
+    extend: {
+     
+     
+    },
   },
   plugins: [],
 };
