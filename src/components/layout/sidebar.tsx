@@ -5,6 +5,8 @@ import Link from "next/link";
 import { FaHome, FaUsers, FaBox, FaCog, FaSignOutAlt } from "react-icons/fa";
 import { cn }  from "@/lib/utils"
 import { MenubarItem, MenubarMenu } from "../menubar";
+import { IoCellularOutline, IoLibrary } from "react-icons/io5";
+import { MdAutoStories } from "react-icons/md";
 
 type NavItem = {
   label: string;
@@ -13,10 +15,11 @@ type NavItem = {
 };
 
 const NAV: NavItem[] = [
-  { label: "Dashboard", href: "", icon: FaHome },
-  { label: "Users", href: "", icon: FaUsers },
-  { label: "Products", href: "", icon: FaBox },
-  { label: "Settings", href: "", icon: FaCog },
+  { label: "Home", href: "/home", icon: FaHome },
+  { label: "Library", href: "", icon: IoLibrary},
+  { label: "Profile", href: "", icon: FaUsers },
+  { label: "Stories", href: "", icon: MdAutoStories },
+  { label: "Stats", href: "", icon: IoCellularOutline  },
 ];
 
 export default function Sidebar({
@@ -32,10 +35,10 @@ export default function Sidebar({
     <aside
     className={cn(
    
-      "h-screen bg-background border-r border-border flex flex-col justify-between transition-[width] duration-700 ease-in-out overflow-hidden"
+      "h-screen bg-background border-r-2 border-border flex flex-col justify-between transition-[width] duration-700 ease-in-out overflow-hidden hover:bg-muted/10  border-gray-300",
     )}
     style={{
-      width: collapsed ? "72px" : "170px", 
+      width: collapsed ? "72px" : "150px", 
     }}
     aria-label="Sidebar"
   >
@@ -65,7 +68,7 @@ export default function Sidebar({
                   href={item.href}
                   onClick={() => isMobile && onCloseMobile?.()}
                   className={cn(
-                    "flex items-center gap-5 text-foreground rounded-md px-3 py-2 hover:bg-muted/10 transition-colors",
+                    "flex items-center gap-5 text-foreground rounded-md px-3 py-2 hover:bg-muted/10 transition-colors hover:text-black text-gray-700",
                     collapsed ? "justify-center" : "justify-start"
                   )}
                 >
@@ -85,7 +88,7 @@ export default function Sidebar({
     <div className="mb-[1vh] px-2">
       <button
         className={cn(
-          "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semibold ",
+          "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semiboldhover:text-black text-gray-700 ",
           collapsed ? "justify-center" : "justify-start"
         )}
       >

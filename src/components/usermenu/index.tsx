@@ -6,6 +6,7 @@ import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, Me
 import { CiSettings } from 'react-icons/ci';
 import { IoHelpCircleOutline } from 'react-icons/io5';
 import { GiJusticeStar } from 'react-icons/gi';
+import { TfiWrite } from 'react-icons/tfi';
 
 function Usermenu() {
     const { data: session, status } = useSession();
@@ -25,7 +26,7 @@ function Usermenu() {
       <p>Loading...</p>
     ) : session ? (
       <>
-        <p className=" text-gray-600">Write</p>
+        <p className=" text-gray-600 flex gap-2"><TfiWrite className='items-center justify-center mt-1 text-lg' />Write</p>
        
        <FaBell className='w-5 h-5'/>
        <Menubar className='w-10 h-10 cursor-pointer' >

@@ -45,7 +45,7 @@ function Navbar({collapsed, setCollapsed}: {collapsed: boolean, setCollapsed: Re
             <input
               type="text"
               placeholder="Search"
-              className="rounded-xl px-4 py-2 bg-gray-200"
+              className="rounded-2xl px-5 py-1  bg-gray-200"
             />
           </div>
 
