@@ -7,6 +7,7 @@ import { CiSettings } from 'react-icons/ci';
 import { IoHelpCircleOutline } from 'react-icons/io5';
 import { GiJusticeStar } from 'react-icons/gi';
 import { TfiWrite } from 'react-icons/tfi';
+import Link from 'next/link';
 
 function Usermenu() {
     const { data: session, status } = useSession();
@@ -26,12 +27,12 @@ function Usermenu() {
       <p>Loading...</p>
     ) : session ? (
       <>
-        <p className=" text-gray-600 flex gap-2"><TfiWrite className='items-center justify-center mt-1 text-lg' />Write</p>
+        <p className=" text-gray-600 flex gap-2 cursor-pointer"> <Link href='/write'><TfiWrite className='items-center justify-center mt-1  text-lg' />Write</Link></p>
        
        <FaBell className='w-5 h-5'/>
        <Menubar className='w-10 h-10 cursor-pointer' >
         <MenubarMenu >
-        <MenubarTrigger > 
+        <MenubarTrigger className='cursor-pointer' > 
         <Image
           className="rounded-full"
           src={session.user?.image || "favicon.ico"}
@@ -41,7 +42,7 @@ function Usermenu() {
         />
           
         </MenubarTrigger>
-        <MenubarContent>
+        <MenubarContent className='bg-white'>
           <MenubarItem className='cursor-pointer text-profile ' >  <Image
           className="rounded-full"
           src={session.user?.image || "favicon.ico"}

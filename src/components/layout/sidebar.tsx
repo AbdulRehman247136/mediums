@@ -2,11 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaHome, FaUsers, FaBox, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaUsers, FaBox, FaCog, FaSignOutAlt, FaPlus } from "react-icons/fa";
 import { cn }  from "@/lib/utils"
 import { MenubarItem, MenubarMenu } from "../menubar";
 import { IoCellularOutline, IoLibrary } from "react-icons/io5";
 import { MdAutoStories } from "react-icons/md";
+import { IoMdPeople } from "react-icons/io";
 
 type NavItem = {
   label: string;
@@ -17,9 +18,11 @@ type NavItem = {
 const NAV: NavItem[] = [
   { label: "Home", href: "/home", icon: FaHome },
   { label: "Library", href: "", icon: IoLibrary},
-  { label: "Profile", href: "", icon: FaUsers },
+  { label: "Profile", href: "", icon: IoMdPeople},
   { label: "Stories", href: "", icon: MdAutoStories },
   { label: "Stats", href: "", icon: IoCellularOutline  },
+  { label: "Following", href: "", icon:FaUsers   },
+
 ];
 
 export default function Sidebar({
@@ -38,7 +41,7 @@ export default function Sidebar({
       "h-screen bg-background border-r-2 border-border flex flex-col justify-between transition-[width] duration-700 ease-in-out overflow-hidden hover:bg-muted/10  border-gray-300",
     )}
     style={{
-      width: collapsed ? "72px" : "150px", 
+      width: collapsed ? "72px" : "20vh", 
     }}
     aria-label="Sidebar"
   >
@@ -63,12 +66,13 @@ export default function Sidebar({
           {NAV.map((item) => {
             const Icon = item.icon;
             return (
+              <>
               <li key={item.href}>
                 <Link
                   href={item.href}
                   onClick={() => isMobile && onCloseMobile?.()}
                   className={cn(
-                    "flex items-center gap-5 text-foreground rounded-md px-3 py-2 hover:bg-muted/10 transition-colors hover:text-black text-gray-700",
+                    "flex items-center gap-5 text-foreground rounded-md px-3 py-2 hover:bg-muted/10 transition-colors hover:text-black text-sidebar",
                     collapsed ? "justify-center" : "justify-start"
                   )}
                 >
@@ -78,8 +82,12 @@ export default function Sidebar({
                   )}
                 </Link>
               </li>
+             
+              </>
             );
           })}
+   
+
         </ul>
       </nav>
     </div>
@@ -88,7 +96,7 @@ export default function Sidebar({
     <div className="mb-[1vh] px-2">
       <button
         className={cn(
-          "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semiboldhover:text-black text-gray-700 ",
+          "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semiboldhover:text-black text-sidebar ",
           collapsed ? "justify-center" : "justify-start"
         )}
       >

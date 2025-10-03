@@ -10,6 +10,7 @@
     --text-high:16px; /* now your base text will be smaller 16px */
     --text-lower:8px; /* now your base text will be smaller 8px */
     --color-profile:#8b8d91;
+    --color-sidebar:#4b5563;
   }
 
   body{

@@ -68,6 +68,7 @@ const MenubarTrigger = React.forwardRef<
     {...props}
   />
 ))
+
 MenubarTrigger.displayName = "MenubarTrigger"
 
 // Dropdown content

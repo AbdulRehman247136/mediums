@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/sidebar";
 import Navbar from "@/components/layout/Navbar";
+import RightSideBar from "@/components/layout/rightsidebar";
+import Footer from "@/components/layout/footer";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -35,9 +37,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         {/* ✅ Navbar (can toggle sidebar) */}
         <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <RightSideBar />
 
         {/* ✅ Page content */}
         <main className="p-6 overflow-auto">{children}</main>
+     
       </div>
     </div>
   );
