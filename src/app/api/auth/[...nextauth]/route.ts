@@ -1,3 +1,6 @@
+import connectDB from "@/lib/db";
+import Post from "@/models/post";
+import User from "@/models/User";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -15,8 +18,20 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, account, user }) {
+      await connectDB();
       if (account && user) {
+        let dbUser = await User.findOne({ email: user.email });
+
+        if (!dbUser) {
+          dbUser = await User.create({
+            email: user.email,
+            name: user.name,
+            image: user.image,
+          });
+        }
+        
         token.accessToken = account.access_token;
+        token.mongoid = dbUser._id.toString();
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
@@ -27,7 +42,7 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       session.accessToken = token.accessToken;
-      session.user.id = token.id;
+      session.user.id = token.mongoid;
       session.user.name = token.name;
       session.user.email = token.email;
       session.user.image = token.picture;

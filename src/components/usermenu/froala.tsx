@@ -26,9 +26,7 @@ const FroalaEditor: React.FC = () => {
       body: JSON.stringify({
         content,
        
-          name: session.user?.name,
-          email: session.user?.email,
-          image: session.user?.image,
+         
       
       }),
     });
@@ -82,10 +80,7 @@ const FroalaEditor: React.FC = () => {
               "redo",
               "align",
               "paragraphFormat",
-              "heading",
-              "formatOL",
-              "formatUL",
-              "quote",
+              "headings",
             ],
           }}
         />

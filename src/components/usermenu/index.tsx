@@ -8,6 +8,7 @@ import { IoHelpCircleOutline } from 'react-icons/io5';
 import { GiJusticeStar } from 'react-icons/gi';
 import { TfiWrite } from 'react-icons/tfi';
 import Link from 'next/link';
+import TypingText from '../ui/shadcn-io/typing-text';
 
 function Usermenu() {
     const { data: session, status } = useSession();
@@ -24,7 +25,16 @@ function Usermenu() {
   return (
     <div className="flex items-center gap-8">
     {status === "loading" ? (
-      <p>Loading...</p>
+      <p> <TypingText
+      text={["Loading..."]}
+      typingSpeed={75}
+      pauseDuration={1500}
+      showCursor={true}
+      cursorCharacter="|"
+      className="text-xl font-bold"
+      textColors={['black']}
+      variableSpeed={{ min: 50, max: 120 }}
+    /></p>
     ) : session ? (
       <>
         <p className=" text-gray-600 flex gap-2 cursor-pointer"> <Link href='/write'><TfiWrite className='items-center justify-center mt-1  text-lg' />Write</Link></p>

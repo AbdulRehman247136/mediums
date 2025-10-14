@@ -1,12 +1,10 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
 
 
 export interface IPost extends Document {
   content: string;
-    name: string;
-    email: string;
-    image?: string;
+    userId: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -15,9 +13,7 @@ export interface IPost extends Document {
 const PostSchema: Schema<IPost> = new Schema(
   {
     content: { type: String, required: true },
-      name: { type: String, required: true },
-      email: { type: String, required:true },
-      image: { type: String,  },
+      userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
        createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }

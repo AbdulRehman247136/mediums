@@ -4,6 +4,7 @@ import connectDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // ✅ Correct path
 import Post from "@/models/post";
+import User from "@/models/User";
 
 export async function POST(req: Request) {
   try {
@@ -14,14 +15,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
     }
 
+    await connectDB();
     const { content } = await req.json();
+
+    const user = await User.findOne({ email: session.user?.email });
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
 
     const newPost = await Post.create({
       content,
-      
-        name: session.user?.name,
-        email: session.user?.email,
-        image: session.user?.image,
+      userId: user.id,
    
       createdAt: new Date(),
     });
@@ -35,12 +39,22 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  try {
-    await connectDB();
-    const posts = await Post.find().sort({ createdAt: -1 });
-    return NextResponse.json(posts, { status: 200 });
-  } catch (error) {
-    console.error("GET error:", error);
-    return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 });
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
+
+  await connectDB();
+
+  const user = await User.findOne({ email: session.user?.email });
+  if (!user) {
+    return NextResponse.json({ message: "User not found" }, { status: 404 });
+  }
+
+  // Fetch posts with user data populated
+  const posts = await Post.find({ userId: user._id })
+    .populate("userId", "name email image") // 👈 populate specific fields
+    .exec();
+
+  return NextResponse.json(posts);
 }

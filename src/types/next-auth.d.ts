@@ -8,11 +8,16 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      mongoid?: string;
     } & DefaultSession["user"];
   }
 
   interface User extends DefaultUser {
     id?: string;
+    email:string;
+    name?:string;
+    image?:string;
+
   }
 }
 
@@ -23,5 +28,6 @@ declare module "next-auth/jwt" {
     email?: string | null;
     picture?: string | null;
     accessToken?: string;
+    mongoid?: string;
   }
 }
