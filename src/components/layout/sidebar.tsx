@@ -19,7 +19,7 @@ const NAV: NavItem[] = [
   { label: "Home", href: "/home", icon: FaHome },
   { label: "Library", href: "", icon: IoLibrary},
   { label: "Profile", href: "", icon: IoMdPeople},
-  { label: "Stories", href: "", icon: MdAutoStories },
+  { label: "Stories", href: "/stories", icon: MdAutoStories },
   { label: "Stats", href: "", icon: IoCellularOutline  },
   { label: "Following", href: "", icon:FaUsers   },
 

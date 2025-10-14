@@ -38,23 +38,24 @@ export async function POST(req: Request) {
   }
 }
 
+
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  try {
+    await connectDB();
+
+    // Fetch all posts from database
+    
+      const posts = await Post.find()
+      .populate("userId", "name email image")
+      .sort({ createdAt: -1 });
+    // Sort by newest first
+
+    return NextResponse.json(posts, { status: 200 });
+  } catch (error: unknown) {
+    console.error("❌ GET /api/posts error:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ success: false, message }, { status: 500 });
+    
+    
   }
-
-  await connectDB();
-
-  const user = await User.findOne({ email: session.user?.email });
-  if (!user) {
-    return NextResponse.json({ message: "User not found" }, { status: 404 });
-  }
-
-  // Fetch posts with user data populated
-  const posts = await Post.find({ userId: user._id })
-    .populate("userId", "name email image") // 👈 populate specific fields
-    .exec();
-
-  return NextResponse.json(posts);
 }

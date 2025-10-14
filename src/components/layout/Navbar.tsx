@@ -4,6 +4,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import Sidebar from "@/components/layout/sidebar";
 import Usermenu from "../usermenu";
+import Link from "next/link";
 
 function Navbar({collapsed, setCollapsed}: {collapsed: boolean, setCollapsed: React.Dispatch<React.SetStateAction<boolean>>}) {
   
@@ -39,7 +40,7 @@ function Navbar({collapsed, setCollapsed}: {collapsed: boolean, setCollapsed: Re
        
 
             {/* ✅ Logo */}
-            <h1 className="text-2xl font-bold">Medium</h1>
+            <h1 className="text-2xl font-bold"><Link href="/home"> Medium </Link></h1>
 
             {/* ✅ Search */}
             <input

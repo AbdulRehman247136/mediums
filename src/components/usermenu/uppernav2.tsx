@@ -1,8 +1,10 @@
 "use client"
 
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/menubar'
+
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 // ✅ Icons
@@ -23,7 +25,7 @@ function Uppernav2() {
           <div className="flex items-center gap-8">
             {session ? (
               <>
-                <h1 className="text-2xl font-bold">Medium</h1>
+                <h1 className="text-2xl font-bold cursor-pointer"><Link href="/home"> Medium </Link></h1>
                 <p className = "text-gray-700">Draft in {session?.user?.name}</p>
               </>
             ) : (
@@ -140,7 +142,9 @@ function Uppernav2() {
                   Library <GiJusticeStar className="text-yellow-500" />
                 </MenubarItem>
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
+                <Link href="/stories">
                   Stories
+                  </Link>
                 </MenubarItem>
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
                   Stats
