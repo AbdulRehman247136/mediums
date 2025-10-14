@@ -61,7 +61,7 @@ function TabsContent({
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
-      className={cn("mt-10", className)}
+      className={cn("mt-10 w-full", className)}
       {...props}
     />
   )

@@ -40,9 +40,7 @@ export default function Sidebar({
    
       "h-min-screen bg-background border-r-2 border-border flex flex-col justify-between transition-[width] duration-700 ease-in-out overflow-hidden hover:bg-muted/10  border-gray-300",
     )}
-    style={{
-      width: collapsed ? "72px" : "25vh", 
-    }}
+
     aria-label="Sidebar"
   >
     {/* Top section (logo + nav) */}

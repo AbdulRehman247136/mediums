@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import SessionProviderWrapper from "../SessionProviderWrapper";
-
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "My App",

@@ -1,16 +1,24 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
+
+
 export interface IPost extends Document {
   content: string;
-  author?: string;
-  createdAt: Date;
-  updatedAt: Date;
+    name: string;
+    email: string;
+    image?: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
+
 
 const PostSchema: Schema<IPost> = new Schema(
   {
     content: { type: String, required: true },
-    author: { type: String, default: "Anonymous" },
+      name: { type: String, required: true },
+      email: { type: String, required:true },
+      image: { type: String,  },
+       createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

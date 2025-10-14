@@ -42,13 +42,19 @@ const PostList = () => {
           key={post._id}
           className="border p-4 rounded-lg shadow-sm bg-white hover:shadow-md transition-all"
         >
+         <img
+  src={post.image}
+  alt="User"
+  className="w-7 h-7 rounded-full object-cover"
+/>
+
           {/* 📝 Display content safely */}
           <div
             className="prose prose-gray max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
           <p className="text-sm text-gray-500 mt-2">
-            {post.author ? `— ${post.author}` : ""}
+            {post.name ? `— ${post.name}` : ""}
           </p>
           <p className="text-xs text-gray-400">
             {post.createdAt

@@ -1,47 +1,43 @@
-import { JsonWebTokenError } from "jsonwebtoken";
-import NextAuth,{NextAuthOptions} from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const authOptions:NextAuthOptions = {
-
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-   
-    ],
+  ],
 
-    session: {
-        strategy: "jwt",
-        maxAge:30*60*60,
-        updateAge:60*60,
+  session: {
+    strategy: "jwt",
+  },
+
+  callbacks: {
+    async jwt({ token, account, user }) {
+      if (account && user) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.image;
+      }
+      return token;
     },
-    callbacks: {
-        async jwt({ token, account,user }) {
-            if (account) {
-                token.accessToken = account.access_token;
-                token.id = user.id;
-            }
-            return token;
-           
-        },
 
-        async session({ session, token,  }) {
-            session.accessToken = token.accessToken;
-            session.user.id = token.id;
-           
-            return session;
-        },
-
-
+    async session({ session, token }) {
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      session.user.name = token.name;
+      session.user.email = token.email;
+      session.user.image = token.picture;
+      return session;
     },
-  
+  },
+
   secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
 
-
-export const GET = handler;
-export const POST = handler;
+export { handler as GET, handler as POST };

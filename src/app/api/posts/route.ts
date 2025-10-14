@@ -1,21 +1,36 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
-import Post, { IPost } from "@/models/post";
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // ✅ Correct path
+import Post from "@/models/post";
 
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const { content, author }: Partial<IPost> = await req.json();
 
-    if (!content) {
-      return NextResponse.json({ error: "Content is required" }, { status: 400 });
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
     }
 
-    const post = await Post.create({ content, author });
-    return NextResponse.json(post, { status: 201 });
-  } catch (error) {
-    console.error("POST error:", error);
-    return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
+    const { content } = await req.json();
+
+    const newPost = await Post.create({
+      content,
+      
+        name: session.user?.name,
+        email: session.user?.email,
+        image: session.user?.image,
+   
+      createdAt: new Date(),
+    });
+
+    return NextResponse.json({ success: true, post: newPost }, { status: 201 });
+  } catch (error: unknown) {
+    console.error("❌ POST /api/posts error:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ success: false, message }, { status: 500 });
   }
 }
 

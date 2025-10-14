@@ -5,6 +5,7 @@ import Sidebar from "@/components/layout/sidebar";
 import Navbar from "@/components/layout/Navbar";
 import RightSideBar from "@/components/layout/rightsidebar";
 import Footer from "@/components/layout/footer";
+import { cn } from "@/lib/utils";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -22,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   // ✅ Set CSS variable for smooth sidebar width
   useEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty("--sidebar-width", collapsed ? "72px" : "240px");
+    root.style.setProperty("--sidebar-width", collapsed ? "72px" : "220px");
   }, [collapsed]);
 
   return (
@@ -32,15 +33,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* ✅ Main Content Area */}
       <div
-        className="flex flex-col flex-1 transition-all duration-300"
-       
+        className={cn(
+          "flex flex-col flex-1 transition-all duration-300 ease-in-out" // ✅ dynamically uses CSS variable
+        )}
       >
         {/* ✅ Navbar (can toggle sidebar) */}
         <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
-        <RightSideBar />
+       
 
         {/* ✅ Page content */}
-        <main className="p-6 overflow-auto">{children}</main>
+        <main className="">{children}</main>
      
       </div>
     </div>
