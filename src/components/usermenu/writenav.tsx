@@ -135,8 +135,9 @@ function Uppernav2() {
                 </MenubarItem>
                 <MenubarSeparator className="bg-gray-500" />
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
-          
+                  <Link href="/profile">
                   Profile
+                  </Link>
                 </MenubarItem>
 
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
@@ -152,7 +153,9 @@ function Uppernav2() {
                   </Link>
                 </MenubarItem>
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
+                <Link href="/stats">
                   Stats
+                  </Link>
                 </MenubarItem>
                 <MenubarSeparator className="bg-gray-500" />
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
