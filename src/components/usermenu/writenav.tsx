@@ -135,11 +135,16 @@ function Uppernav2() {
                 </MenubarItem>
                 <MenubarSeparator className="bg-gray-500" />
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
+          
                   Profile
                 </MenubarItem>
 
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
+                <Link 
+                href="/library"
+                className="flex items-center gap-2">
                   Library <GiJusticeStar className="text-yellow-500" />
+                  </Link>
                 </MenubarItem>
                 <MenubarItem className="gap-3 pl-3 text-high hover:bg-muted/10 hover:text-black">
                 <Link href="/stories">

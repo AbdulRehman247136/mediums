@@ -1,7 +1,8 @@
 "use client";
 
 import Footer from "@/components/layout/footer";
-import UpperNav from "@/components/layout/uppernav";
+import UpperNav from "@/components/layout/landingnav";
+
 
 
 

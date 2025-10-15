@@ -1,7 +1,7 @@
 "use client"
 
 import FroalaEditor from "@/components/usermenu/froala"
-import Uppernav2 from "@/components/usermenu/uppernav2"
+import Uppernav2 from "@/components/usermenu/writenav"
 
 
 

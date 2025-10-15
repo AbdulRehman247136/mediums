@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/layout/sidebar";
-import Navbar from "@/components/layout/Navbar";
+
 import RightSideBar from "@/components/layout/rightsidebar";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/layout/homenav";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {

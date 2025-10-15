@@ -17,7 +17,7 @@ type NavItem = {
 
 const NAV: NavItem[] = [
   { label: "Home", href: "/home", icon: FaHome },
-  { label: "Library", href: "", icon: IoLibrary},
+  { label: "Library", href: "/library", icon: IoLibrary},
   { label: "Profile", href: "", icon: IoMdPeople},
   { label: "Stories", href: "/stories", icon: MdAutoStories },
   { label: "Stats", href: "", icon: IoCellularOutline  },

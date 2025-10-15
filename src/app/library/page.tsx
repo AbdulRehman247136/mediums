@@ -11,32 +11,35 @@ import { Tabs, TabsList } from "@radix-ui/react-tabs"
 
 
 
-function Stories(){
+function Library(){
 
   return (
     
-    <div className=" overflow-x-hidden">
+    <div className=" overflow-x-hidden m-auto w-[110vh]">
     <div className="flex items-center justify-between m-15">
         <div >
             <h1 className="text-4xl">
-                Stories
+               library
             </h1>
         </div>
         <div>
         <button className="border rounded-4xl px-4 py-2 bg-green-600 text-white">
-            Import an Story
+          New list
         </button>
         </div>
         </div>
+        <div>
+        
+    
 
 
-
-        <Tabs defaultValue="for-you" className="w-full p-6  ml-10">
+        <Tabs defaultValue="for-you" className="w-full p-4  ml-10 border-b-1 border-gray-300 mb-0">
   <TabsList className="gap-6 flex " >
-    <TabsTrigger value="drafts">Drafts</TabsTrigger>
-    <TabsTrigger value="published">Published</TabsTrigger>
-    <TabsTrigger value="unlisted">Unlisted</TabsTrigger>
-    <TabsTrigger value="submissions">Submissions</TabsTrigger>
+    <TabsTrigger value="yourlists">Your lists</TabsTrigger>
+    <TabsTrigger value="savedlists">Saved lists </TabsTrigger>
+    <TabsTrigger value="highlights">Highlights</TabsTrigger>
+    <TabsTrigger value="readinghistory">Reading History</TabsTrigger>
+    <TabsTrigger value="responses">Responses</TabsTrigger>
   </TabsList>
   <div className="flex items-center justify-start ">
   <TabsContent value="published">
@@ -48,7 +51,8 @@ function Stories(){
 </Tabs>
 
         </div>
+        </div>
   )
 }
 
-export default Stories
+export default Library
