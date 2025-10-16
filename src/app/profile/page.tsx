@@ -9,6 +9,7 @@ import React from 'react'
 function Profile() {
   const { data: session, status } = useSession();
   return (
+    <div className='flex items-start  '> 
     <div className=" overflow-x-hidden ml-10 ">
       {session && (
     <div className="flex items-center justify-between m-15">
@@ -27,7 +28,7 @@ function Profile() {
         <Tabs defaultValue="for-you" className="w-3xl p-4  ml-10 border-b-1 border-gray-300 mb-0">
   <TabsList className="gap-6 flex " >
     <TabsTrigger value="home" className="cursor-pointer">Home</TabsTrigger>
-    <TabsTrigger value="about" className="cursor-pointer">About</TabsTrigger>
+    <TabsTrigger value="about" >About</TabsTrigger>
   
   </TabsList>
   <div className="flex items-center justify-start ">
@@ -36,6 +37,11 @@ function Profile() {
 </Tabs>
 
         </div>
+        </div>
+        <div className="flex">
+<RightSideBar />
+</div>
+
         </div>
   )
 }

@@ -6,27 +6,35 @@ import React from 'react'
 
 function Home() {
   return (
-    
-    <div className='flex items-start  '> 
-    <Tabs defaultValue="for-you" className="w-full p-6">
-  <TabsList className="gap-6 flex border-b border-gray-300 w-full" >
-    <TabsTrigger value="for-you">For you</TabsTrigger>
-    <TabsTrigger value="featured">Featured</TabsTrigger>
-  </TabsList>
-  <div className="flex items-center justify-start ">
-  <TabsContent value="for-you">For You content
+<div className="flex flex-col md:flex-row w-full">
+  {/* 📰 Main content */}
+  <div className="flex-1 md:flex-[3] p-4">
+    <Tabs defaultValue="for-you" className="w-full">
+      <TabsList className="flex gap-6 border-b border-gray-300 w-full mt-7">
+        <TabsTrigger value="for-you">For You</TabsTrigger>
+        <TabsTrigger value="featured">Featured</TabsTrigger>
+      </TabsList>
 
-  <PostList />
-  </TabsContent>
-  <TabsContent value="featured">Featured content</TabsContent>
+      <div className="">
+        <TabsContent value="for-you">
+          <h2 className="text-lg font-semibold mb-2">For You Content</h2>
+          <PostList />
+        </TabsContent>
+
+        <TabsContent value="featured">
+          <h2 className="text-lg font-semibold mb-2">Featured Content</h2>
+          <p>Featured posts here...</p>
+        </TabsContent>
+      </div>
+    </Tabs>
   </div>
-</Tabs>
-<div className="flex">
-<RightSideBar />
+
+  {/* 📎 Sidebar */}
+  <div className="md:flex-[0.7] p-4 md:ml-4">
+    <RightSideBar />
+  </div>
 </div>
 
-      
-    </div>
   )
 }
 

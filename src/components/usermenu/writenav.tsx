@@ -12,7 +12,11 @@ import { CgMenuGridO } from 'react-icons/cg'
 import { FaBell } from 'react-icons/fa'
 import { GiJusticeStar } from 'react-icons/gi'
 
-function Uppernav2() {
+interface Uppernav2Props {
+  typingStatus: "typing" | "typed" | "idle";
+}
+
+function Uppernav2({typingStatus }: Uppernav2Props) {
   const { data: session } = useSession()
 
   return (
@@ -27,6 +31,12 @@ function Uppernav2() {
               <>
                 <h1 className="text-2xl font-bold cursor-pointer"><Link href="/home"> Medium </Link></h1>
                 <p className = "text-gray-700">Draft in {session?.user?.name}</p>
+                {typingStatus === "typing" && (
+        <p className="text-sm text-gray-500 animate-pulse">✍️ Saving...</p>
+      )}
+      {typingStatus === "typed" && (
+        <p className="text-sm text-green-600">✅ Saved</p>
+      )}
               </>
             ) : (
               <p className="text-lg">error</p>

@@ -63,7 +63,7 @@ const PostList = () => {
 /></p>;
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-6 space-y-6">
+    <div className="w-screen max-w-3xl mx-auto mt-6 space-y-6">
       {posts.map((post) => (
         <div
           key={post._id}

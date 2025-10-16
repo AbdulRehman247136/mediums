@@ -1,25 +1,22 @@
-"use client"
+"use client";
 
-import FroalaEditor from "@/components/usermenu/froala"
-import Uppernav2 from "@/components/usermenu/writenav"
-
-
-
+import { useState } from "react";
+import FroalaEditor from "@/components/usermenu/froala";
+import Uppernav2 from "@/components/usermenu/writenav";
 
 function Write() {
+  const [typingStatus, setTypingStatus] = useState<"typing" | "typed" | "idle">("idle");
+
+
   return (
     <div className="h-screen flex flex-col">
-   
-    
-      <Uppernav2 />
-  
-  
-    <div className="flex-1 flex items-center justify-center">
-      <FroalaEditor />
+      <Uppernav2 typingStatus={typingStatus} />
+
+      <div className="flex-1 flex items-center justify-center">
+        <FroalaEditor onTypingStatusChange={setTypingStatus} />
+      </div>
     </div>
-  </div>
-  
-  )
+  );
 }
 
-export default Write
+export default Write;
