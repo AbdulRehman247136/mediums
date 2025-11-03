@@ -1,17 +1,20 @@
 "use client";
+import ClapButton from "@/components/clapbutton/clapbutton";
 import TypingText from "@/components/ui/shadcn-io/typing-text";
 import React, { useEffect, useState } from "react";
+
 
 interface Post {
   _id: string;
   content: string;
   author?: string;
   createdAt?: string;
-  userId:{
+  claps?: number; 
+  userId: {
     name?: string;
     image?: string;
     email?: string;
-  }
+  };
 }
 
 const MyPost = () => {
@@ -88,8 +91,15 @@ const MyPost = () => {
               ? new Date(post.createdAt).toLocaleString()
               : ""}
           </p>
+          <div className="mt-3">
+            <ClapButton
+              postId={post._id}
+              initialClaps={post.claps ?? 0}
+            />
+          </div>
         </div>
       ))}
+      
     </div>
   );
 };
