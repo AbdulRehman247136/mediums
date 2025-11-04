@@ -21,6 +21,7 @@ const DetailPostsPage = () => {
       try {
         const res = await fetch(`/api/posts/${postId}`);
         const data = await res.json();
+        console.log("get api data ",data.post)
         setPost(data.post);
       } catch (err) {
         console.error("Error fetching post:", err);

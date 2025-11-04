@@ -24,6 +24,6 @@ export async function GET() {
     const posts = await Post.find({ userId: user._id })
       .populate("userId", "name email image") // 👈 populate specific fields
       .exec();
-  
+      
     return NextResponse.json(posts);
   }

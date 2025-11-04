@@ -12,6 +12,7 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-tabs": "^1.1.13",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.8.0",
     "clsx": "^2.1.1",
     "froala-editor": "^4.6.2",
     "gsap": "^3.13.0",
