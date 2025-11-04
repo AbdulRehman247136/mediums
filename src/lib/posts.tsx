@@ -11,7 +11,7 @@ interface Post {
   content: string;
   author?: string;
   createdAt?: string;
-  claps?: number; // 👈 add this to type
+  claps?: number; 
   userId: {
     name?: string;
     image?: string;
@@ -89,15 +89,19 @@ const PostList = () => {
   
 
 
-{posts.map((post) => (
-  <Link href={`/posts/${post._id}`} key={post._id}>
+  {posts.map((post) => (
+  <Link
+  href={`/detailposts?postId=${post._id}`}
+    key={post._id}
+    className="block" // ensures the Link is a block element
+  >
     <div
       className="border p-4 rounded-lg shadow-sm bg-white hover:shadow-md transition-all overflow-x-clip cursor-pointer"
     >
       <div className="flex items-center gap-2">
         <img
-          src={post?.userId?.image}
-          alt="User"
+          src={post?.userId?.image || "/default-avatar.png"}
+          alt={post?.userId?.name ?? "User"}
           className="w-7 h-7 rounded-full object-cover"
         />
         <p className="text-sm text-gray-500">
@@ -105,7 +109,6 @@ const PostList = () => {
         </p>
       </div>
 
-      {/* 📝 Truncated content */}
       <div
         className="prose prose-gray max-w-none mt-2"
         dangerouslySetInnerHTML={{
@@ -123,6 +126,7 @@ const PostList = () => {
     </div>
   </Link>
 ))}
+
 
       
     </div>

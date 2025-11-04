@@ -2,13 +2,13 @@ import React from 'react'
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { FaBell } from 'react-icons/fa';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../menubar';
 import { CiSettings } from 'react-icons/ci';
 import { IoHelpCircleOutline } from 'react-icons/io5';
 import { GiJusticeStar } from 'react-icons/gi';
 import { TfiWrite } from 'react-icons/tfi';
 import Link from 'next/link';
 import TypingText from '../ui/shadcn-io/typing-text';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../menubar';
 
 function Usermenu() {
     const { data: session, status } = useSession();

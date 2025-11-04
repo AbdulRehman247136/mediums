@@ -1,7 +1,6 @@
 "use client"
 
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/menubar'
-
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../menubar';
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
