@@ -1,6 +1,7 @@
 "use client"
 
 import { TabsContent, TabsTrigger } from "@/components/ui/tabs"
+import Charts from "@/lib/charts"
 import MyPost from "@/lib/myposts"
 import { Tabs, TabsList } from "@radix-ui/react-tabs"
 
@@ -31,10 +32,12 @@ function Stats(){
         <Tabs defaultValue="for-you" className="w-3xl p-4  ml-10 border-b-1 border-gray-300 mb-0">
   <TabsList className="gap-6 flex " >
     <TabsTrigger value="stories">Stories</TabsTrigger>
+    
     <TabsTrigger value="audience">Audience</TabsTrigger>
   
   </TabsList>
   <div className="flex items-center justify-start ">
+    <TabsContent value="stories"> <Charts /></TabsContent>
   <TabsContent value="published">
     <MyPost/>
   

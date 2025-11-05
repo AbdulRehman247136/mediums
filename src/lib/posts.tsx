@@ -110,14 +110,21 @@ const PostList = () => {
       </div>
 
       <div
-        className="prose prose-gray max-w-none mt-2"
+        className="prose prose-lg max-w-3xl mx-auto prose-img:rounded-2xl prose-img:shadow-md"
         dangerouslySetInnerHTML={{
           __html: truncateWords(post.content, 10),
         }}
       />
 
       <p className="text-xs text-gray-400 mt-2">
-        {post.createdAt ? new Date(post.createdAt).toLocaleString() : ""}
+      {post.createdAt
+  ? new Date(post.createdAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  : ""}
+
       </p>
 
       <div className="mt-3">

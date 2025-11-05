@@ -19,3 +19,22 @@
   font-style: normal;
   font-weight: 400;
   }
+  .fr-fil {
+    float: left;
+    margin-right: 1rem;
+  }
+  .fr-fir {
+    float: right;
+    margin-left: 1rem;
+  }
+  .fr-dib {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fr-view img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* optional */
+  }
+  

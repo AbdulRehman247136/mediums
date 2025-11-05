@@ -20,7 +20,7 @@ export async function GET(
     }
 
    
-    console.log("this is the detail post",post)
+   
 
     return NextResponse.json({ post});
   } catch (error) {

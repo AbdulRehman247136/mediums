@@ -7,6 +7,7 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/css/froala_style.min.css";
 import { useSession } from "next-auth/react";
 
+
 interface FroalaEditorProps {
   onTypingStatusChange?: (status: "idle" | "typing" | "typed") => void;
 }
@@ -100,7 +101,7 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
             imageUploadURL: "/api/upload", // ✅ Cloudinary upload API
             imageUploadMethod: "POST",
             imageAllowedTypes: ["jpeg", "jpg", "png"],
-            imageMaxSize: 5 * 1024 * 1024, // 5MB limit
+            imageMaxSize: 7 * 1024 * 1024, 
             toolbarButtons: [
               "bold",
               "italic",
@@ -114,14 +115,28 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
               "insertImage", // 👈 enable image upload
             ],
             events: {
-             "image.inserted": function ($img: JQuery<HTMLImageElement>) {
-                 console.log("✅ Image inserted:", $img[0].src);
-              
-                },
-
+              // ✅ Tailwind alignment events with proper typing
+              "image.beforeRemove": function ($img: JQuery<HTMLImageElement>) {
+                $img.removeClass("mx-auto float-left float-right");
+              },
+              "image.alignLeft": function ($img: JQuery<HTMLImageElement>) {
+                $img.removeClass("mx-auto float-right").addClass("float-left");
+              },
+              "image.alignRight": function ($img: JQuery<HTMLImageElement>) {
+                $img.removeClass("mx-auto float-left").addClass("float-right");
+              },
+              "image.alignCenter": function ($img: JQuery<HTMLImageElement>) {
+                $img.removeClass("float-left float-right").addClass("mx-auto block");
+              },
+        
+              // ✅ Optional: image insert + error handlers
+              "image.inserted": function ($img: JQuery<HTMLImageElement>) {
+                console.log("✅ Image inserted:", $img[0].src);
+              },
               "image.error": function (error: unknown) {
                 console.error("❌ Image upload failed:", error);
               },
+              
             },
           }}
         />

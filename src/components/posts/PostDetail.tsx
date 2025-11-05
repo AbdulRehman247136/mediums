@@ -41,7 +41,14 @@ const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
             {post.userId.name}
           </p>
           <p className="text-xs text-gray-400">
-            {post.createdAt ? new Date(post.createdAt).toLocaleString() : ""}
+          {post.createdAt
+  ? new Date(post.createdAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  : ""}
+
           </p>
         </div>
      
