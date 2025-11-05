@@ -1,7 +1,9 @@
 "use client"
 
 import { TabsContent, TabsTrigger } from "@/components/ui/tabs"
-import Charts from "@/lib/charts"
+import Viewcharts from "@/lib/charts"
+
+
 import MyPost from "@/lib/myposts"
 import { Tabs, TabsList } from "@radix-ui/react-tabs"
 
@@ -37,7 +39,7 @@ function Stats(){
   
   </TabsList>
   <div className="flex items-center justify-start ">
-    <TabsContent value="stories"> <Charts /></TabsContent>
+    <TabsContent value="stories"> <Viewcharts /></TabsContent>
   <TabsContent value="published">
     <MyPost/>
   

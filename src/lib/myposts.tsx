@@ -87,9 +87,14 @@ const MyPost = () => {
             {post?.userId?.name ? `${post?.userId?.name}` : ""}
           </p>
           <p className="text-xs text-gray-400">
-            {post.createdAt
-              ? new Date(post.createdAt).toLocaleString()
-              : ""}
+          <p className="text-xs text-gray-400">
+  {post.createdAt
+    ? new Date(post.createdAt).toLocaleDateString("en-GB", {
+        timeZone: "UTC",
+      })
+    : ""}
+</p>
+
           </p>
           <div className="mt-3">
             <ClapButton

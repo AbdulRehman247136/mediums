@@ -16,12 +16,14 @@ const DetailPostsPage = () => {
 
   useEffect(() => {
     if (!postId) return;
-
+  
     const fetchPost = async () => {
       try {
-        const res = await fetch(`/api/posts/${postId}`);
+        const res = await fetch(`/api/posts/${postId}`, {
+          cache: "no-store",
+        });
         const data = await res.json();
-        console.log("get api data ",data.post)
+        console.log("get api data ", data.post);
         setPost(data.post);
       } catch (err) {
         console.error("Error fetching post:", err);
@@ -29,9 +31,10 @@ const DetailPostsPage = () => {
         setLoading(false);
       }
     };
-
+  
     fetchPost();
   }, [postId]);
+  
 
   if (loading) return <p>Loading...</p>;
   if (!post) return <p>Post not found</p>;
@@ -39,4 +42,4 @@ const DetailPostsPage = () => {
   return <PostDetail post={post} />;
 };
 
-export default DetailPostsPage;
+export default DetailPostsPage;  

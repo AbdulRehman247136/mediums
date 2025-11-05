@@ -19,8 +19,7 @@ export async function GET(
       return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
 
-   
-   
+ 
 
     return NextResponse.json({ post});
   } catch (error) {

@@ -7,6 +7,7 @@ export interface IPost extends Document {
     userId: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
+    views:number;
     claps:number;
     likedids: {
       userId: Types.ObjectId;
@@ -19,6 +20,7 @@ const PostSchema: Schema<IPost> = new Schema(
   {
     content: { type: String, required: true },
     claps:{ type: Number, default: 0 },
+    views:{ type: Number, default: 0 },
       userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
       likedids: [
         {
