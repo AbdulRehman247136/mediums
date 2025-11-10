@@ -5,7 +5,7 @@ import SessionProviderWrapper from "../SessionProviderWrapper";
 import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
-  title: "My App",
+  title: "Medium Clone",
   description: "Next.js with NextAuth",
 };
 
