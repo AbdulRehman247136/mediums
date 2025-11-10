@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <main className="flex-1 p-4">{children}</main>
 
           {/* Right Sidebar */}
-          <aside className="w-60 hidden md:block p-4">
+          <aside className="w-70 hidden md:block p-4">
             <RightSideBar />
           </aside>
         </div>

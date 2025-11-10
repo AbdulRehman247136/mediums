@@ -1,5 +1,5 @@
 "use client";
-import RightSideBar from "@/components/layout/rightsidebar";
+import FeaturedContent from "@/components/layout/featuredcontent";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs" 
 import PostList from "@/lib/posts";
 import React from 'react'
@@ -23,7 +23,7 @@ function Home() {
 
         <TabsContent value="featured">
           <h2 className="text-lg font-semibold mb-2">Featured Content</h2>
-          <p>Featured posts here...</p>
+          <FeaturedContent />
         </TabsContent>
       </div>
     </Tabs>
