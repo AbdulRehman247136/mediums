@@ -11,7 +11,7 @@ export async function GET() {
       .sort({ views: -1 }) // sort by most views
       .limit(3)
       .select("content views userId") // pick fields you need
-      .populate("userId", "name"); // populate author's name
+      .populate("userId", "name image"); // populate author's name
 
     return NextResponse.json(topPosts);
   } catch (error) {

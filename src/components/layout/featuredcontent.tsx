@@ -10,10 +10,11 @@ interface TopPost {
   userId: { name?: string; image?: string };
 }
 
-export default function FeaturedContentStack() {
+export default function FeaturedContent() {
   const [topPosts, setTopPosts] = useState<TopPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log("Top posts:", topPosts);
 
   useEffect(() => {
     const fetchTopPosts = async () => {
