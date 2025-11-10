@@ -30,9 +30,7 @@ function Home() {
   </div>
 
   {/* 📎 Sidebar */}
-  <div className="md:flex-[0.7] p-4 md:ml-4">
-    <RightSideBar />
-  </div>
+ 
 </div>
 
   )
