@@ -1,133 +1,69 @@
 "use client";
-import ClapButton from "@/components/clapbutton/clapbutton";
-import TypingText from "@/components/ui/shadcn-io/typing-text";
-import React, { useEffect, useState } from "react";
-import Link from "next/link"; 
 
-interface Post {
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+interface TopPost {
   _id: string;
   content: string;
-  author?: string;
-  createdAt?: string;
-  claps?: number; 
-  userId: {
-    name?: string;
-    image?: string;
-    email?: string;
-  };
+  views: number;
+  userId: { name?: string; image?: string };
 }
 
-const PostList = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+export default function FeaturedContentStack() {
+  const [topPosts, setTopPosts] = useState<TopPost[]>([]);
   const [loading, setLoading] = useState(true);
-
-  function truncateWords(html: string, wordLimit: number): string {
-    const text = html.replace(/<[^>]+>/g, "");
-    const words = text.split(/\s+/).slice(0, wordLimit).join(" ");
-    return words + "...";
-  }
-
-  const fetchPosts = async () => {
-    try {
-      const res = await fetch("/api/posts", { method: "GET" });
-      if (!res.ok) throw new Error("Failed to fetch posts");
-
-      const data = await res.json();
-      console.log("Fetched posts:", data);
-      setPosts(data);
-    } catch (err) {
-      console.error("Error fetching posts:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchPosts();
+    const fetchTopPosts = async () => {
+      try {
+        const res = await fetch("/api/posts/top");
+        if (!res.ok) throw new Error("Failed to fetch top posts");
+        const data = await res.json();
+        setTopPosts(data);
+      } catch (err:string | any) {
+        console.error(err);
+        setError(err.message || "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTopPosts();
   }, []);
 
-  if (loading)
-    return (
-      <p className="text-center mt-10">
-        <TypingText
-          text={["Loading posts..."]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="|"
-          className="text-4xl font-bold"
-          textColors={["black"]}
-          variableSpeed={{ min: 50, max: 120 }}
-        />
-      </p>
-    );
+  const cleanText = (html: string) =>
+    html.replace(/<[^>]+>/g, "").slice(0, 150) + "...";
 
-  if (posts.length === 0)
-    return (
-      <p className="text-center mt-10 text-gray-500">
-        <TypingText
-          text={["No posts available."]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="|"
-          className="text-4xl font-bold"
-          textColors={["black"]}
-          variableSpeed={{ min: 50, max: 120 }}
-        />
-      </p>
-    );
+  if (loading) return <div className="p-5">Loading featured content...</div>;
+  if (error) return <div className="p-5 text-red-500">Error: {error}</div>;
+  if (!topPosts.length) return <div className="p-5">No featured posts yet.</div>;
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-6 space-y-6">
-      {posts.map((post) => (
-        <Link
-          key={post._id}
-          href={`/detailposts?postId=${post._id}`}
-          className="block"
-        >
-          <div className="border p-4 rounded-lg shadow-sm bg-white hover:shadow-md transition-all overflow-x-clip cursor-pointer">
-            {/* Author */}
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src={post?.userId?.image || "/default-avatar.png"}
-                alt={post?.userId?.name ?? "User"}
-                className="w-7 h-7 rounded-full object-cover"
-              />
-              <p className="text-sm text-gray-500">{post?.userId?.name ?? "Anonymous"}</p>
-            </div>
-
-            {/* Post Content */}
-            <div
-              className="prose prose-lg max-w-full mx-auto mb-2"
-              dangerouslySetInnerHTML={{
-                __html: truncateWords(post.content, 10),
-              }}
-            />
-
-            {/* Date */}
-            <p className="text-xs text-gray-400 mb-2">
-              {post.createdAt
-                ? new Date(post.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })
-                : ""}
-            </p>
-
-            {/* Claps */}
-            <div className="flex justify-between items-center mt-1">
-              {post.claps !== undefined && (
-                <ClapButton postId={post._id} initialClaps={post.claps} />
+    <div className="min-h-screen p-5 bg-gray-50 max-w-3xl mx-auto">
+     
+      <div className="space-y-4">
+        {topPosts.map((post) => (
+          <Link
+            key={post._id}
+            href={`/detailposts?postId=${post._id}`}
+            className="block p-4 bg-white border rounded-lg shadow hover:shadow-md transition cursor-pointer"
+          >
+            <div className="flex items-center mb-2">
+              {post.userId?.image && (
+                <img
+                  src={post.userId.image}
+                  alt={post.userId.name || "Author"}
+                  className="w-8 h-8 rounded-full mr-2"
+                />
               )}
-              <span className="text-xs text-gray-500"> </span> {/* Empty span to maintain layout */}
+              <h2 className="text-sm font-semibold">{post.userId?.name || "Author"}</h2>
             </div>
-          </div>
-        </Link>
-      ))}
+            <p className="text-sm text-gray-700 mb-2">{cleanText(post.content)}</p>
+            <span className="text-xs text-gray-500">{post.views} views</span>
+          </Link>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default PostList;
+}

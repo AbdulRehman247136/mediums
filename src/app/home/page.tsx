@@ -8,9 +8,9 @@ function Home() {
   return (
 <div className="flex flex-col md:flex-row w-full">
   {/* 📰 Main content */}
-  <div className="flex-1 md:flex-[3] p-4">
+  <div className="flex-1 md:flex-[3] p-4 ">
     <Tabs defaultValue="for-you" className="w-full">
-      <TabsList className="flex gap-6 border-b border-gray-300 w-full mt-7">
+      <TabsList className=" w-full mt-5 gap-5 flex">
         <TabsTrigger value="for-you">For You</TabsTrigger>
         <TabsTrigger value="featured">Featured</TabsTrigger>
       </TabsList>
