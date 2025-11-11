@@ -10,7 +10,10 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // ✅ Extend Next.js recommended + TypeScript rules
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // ✅ Custom project rules
   {
     ignores: [
       "node_modules/**",
@@ -19,6 +22,12 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // ✅ Turn off unwanted warnings
+      "react/no-unescaped-entities": "off", // allow ' and " inside JSX
+      "@next/next/no-img-element": "off", // allow <img> instead of <Image />
+      "@typescript-eslint/no-unused-vars": "off", // allow unused imports/vars
+    },
   },
 ];
 

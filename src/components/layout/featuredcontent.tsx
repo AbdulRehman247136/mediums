@@ -2,11 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import ClapButton from "../clapbutton/clapbutton";
 
 interface TopPost {
   _id: string;
   content: string;
   views: number;
+  claps: number;
   userId: { name?: string; image?: string };
 }
 
@@ -14,6 +16,7 @@ export default function FeaturedContent() {
   const [topPosts, setTopPosts] = useState<TopPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   console.log("Top posts:", topPosts);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function FeaturedContent() {
         if (!res.ok) throw new Error("Failed to fetch top posts");
         const data = await res.json();
         setTopPosts(data);
-      } catch (err:string | any) {
+      } catch (err: any) {
         console.error(err);
         setError(err.message || "Unknown error");
       } finally {
@@ -42,13 +45,11 @@ export default function FeaturedContent() {
 
   return (
     <div className="min-h-screen p-5 bg-gray-50 max-w-3xl mx-auto">
-     
       <div className="space-y-4">
         {topPosts.map((post) => (
-          <Link
+          <div
             key={post._id}
-            href={`/detailposts?postId=${post._id}`}
-            className="block p-4 bg-white border rounded-lg shadow hover:shadow-md transition cursor-pointer"
+            className="p-4 bg-white border rounded-lg shadow hover:shadow-md transition"
           >
             <div className="flex items-center mb-2">
               {post.userId?.image && (
@@ -58,11 +59,22 @@ export default function FeaturedContent() {
                   className="w-8 h-8 rounded-full mr-2"
                 />
               )}
-              <h2 className="text-sm font-semibold">{post.userId?.name || "Author"}</h2>
+              <h2 className="text-sm font-semibold">
+                {post.userId?.name || "Author"}
+              </h2>
             </div>
-            <p className="text-sm text-gray-700 mb-2">{cleanText(post.content)}</p>
-            <span className="text-xs text-gray-500">{post.views} views</span>
-          </Link>
+
+            {/* ✅ Only this text is clickable */}
+            <Link
+              href={`/detailposts?postId=${post._id}`}
+              className="block text-sm text-gray-700 mb-2 hover:text-blue-600"
+            >
+              {cleanText(post.content)}
+            </Link>
+
+            {/* ✅ Clap button is outside the link — no navigation issue */}
+            <ClapButton postId={post._id} initialClaps={post.claps ?? 0} />
+          </div>
         ))}
       </div>
     </div>

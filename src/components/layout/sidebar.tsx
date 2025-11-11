@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaHome, FaUsers,  FaCog, FaSignOutAlt, FaPlus } from "react-icons/fa";
+import { FaHome, FaUsers, FaSignOutAlt } from "react-icons/fa";
 import { cn }  from "@/lib/utils"
 
 import { IoCellularOutline, IoLibrary } from "react-icons/io5";
