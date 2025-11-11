@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
+import { Suspense } from 'react'
 interface Post {
   _id: string;
   content: string;
@@ -59,7 +59,7 @@ export default function SearchPage() {
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
-  return (
+  return (<Suspense fallback={<>loading ...</>}>
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-semibold mb-6">
         Search results for: <span className="text-blue-600">"{query}"</span>
@@ -129,6 +129,6 @@ export default function SearchPage() {
           </button>
         </div>
       )}
-    </div>
+    </div></Suspense>
   );
 }

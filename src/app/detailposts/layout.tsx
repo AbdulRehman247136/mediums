@@ -7,6 +7,7 @@ import Sidebar from "@/components/layout/sidebar";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/homenav";
+import { Suspense } from 'react'
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -27,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     root.style.setProperty("--sidebar-width", collapsed ? "72px" : "220px");
   }, [collapsed]);
 
-  return (
+  return (<Suspense fallback={<>loading ...</>}>
     <div className="flex min-h-screen">
       {/* ✅ Sidebar on the left */}
       <Sidebar collapsed={collapsed} />
@@ -46,6 +47,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <main className="">{children}</main>
      
       </div>
-    </div>
+    </div></Suspense>
   );
 }

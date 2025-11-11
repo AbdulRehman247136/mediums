@@ -1,8 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import FroalaEditor from "@/components/usermenu/froala";
+import dynamic from "next/dynamic";
+
 import Uppernav2 from "@/components/usermenu/writenav";
+
+const FroalaEditor = dynamic(
+  () => import("@/components/usermenu/froala"),
+  { ssr: false }
+);
 
 function Write() {
   const [typingStatus, setTypingStatus] = useState<"typing" | "typed" | "idle">("idle");

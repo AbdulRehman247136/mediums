@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,Suspense } from "react";
 import Sidebar from "@/components/layout/sidebar";
 
 import RightSideBar from "@/components/layout/rightsidebar";
@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     root.style.setProperty("--sidebar-width", collapsed ? "72px" : "220px");
   }, [collapsed]);
 
-  return (
+  return (<Suspense fallback={<>loading ...</>}>
     <div className="flex min-h-screen">
       {/* ✅ Sidebar on the left */}
       <Sidebar collapsed={collapsed} />
@@ -46,6 +46,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <main className="">{children}</main>
      
       </div>
-    </div>
+    </div></Suspense>
   );
 }
