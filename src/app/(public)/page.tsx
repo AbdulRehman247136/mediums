@@ -9,7 +9,7 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/Dialog";
-  import { useSession, signIn, signOut } from "next-auth/react";
+  import { signIn} from "next-auth/react";
 import { MdEmail } from 'react-icons/md';
 
 function Medium() {

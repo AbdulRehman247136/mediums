@@ -6,7 +6,7 @@ declare namespace NodeJS {
         GOOGLE_CLIENT_SECRET: string;
         NEXTAUTH_SECRET: string;
         MONGODB_URI: string;
-        NEXT_AUTH_URL: string;
+        NEXTAUTH_URL: string;
         CLOUDINARY_API_KEY:number;
         CLOUDINARY_SECRET_CODE:string;
         CLOUDINARY_CLOUD_NAME:string;

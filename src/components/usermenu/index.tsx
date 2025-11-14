@@ -10,6 +10,7 @@ import Link from 'next/link';
 import TypingText from '../ui/shadcn-io/typing-text';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../menubar';
 
+
 function Usermenu() {
     const { data: session, status } = useSession();
     function maskEmail(email: string): string {
@@ -21,6 +22,16 @@ function Usermenu() {
     
       return `${firstTwo}${masked}@${domain}`;
     }
+  
+
+    const handleLogout = async () => {
+      await signOut({
+        redirect: true,
+        callbackUrl: "/", // landing page
+      });
+    };
+
+    
     
   return (
     <div className="flex items-center gap-8">
@@ -72,7 +83,19 @@ function Usermenu() {
           <MenubarItem className='gap-3 pl-3 text-profile text-base hover:bg-muted/10  hover:text-black '>Become a Medium member<GiJusticeStar className='text-yellow-500' /></MenubarItem>
           <MenubarItem className='gap-3 pl-3 text-profile text-base hover:bg-muted/10  hover:text-black'>Apply to the Partner Program</MenubarItem>
           <MenubarSeparator className='bg-gray-500' />
-          <MenubarItem onClick={() => signOut()} className='gap-3 pl-3  text-base text-profile hover:bg-muted/10  hover:text-black'><span>Sign Out <p className='mt-1'>{session.user?.email ? maskEmail(session.user?.email):""}</p></span></MenubarItem>
+          <MenubarItem
+  onClick={handleLogout}
+  className='gap-3 pl-3 text-base text-profile hover:bg-muted/10 hover:text-black'
+>
+  <span>
+    Sign Out  
+    <p className='mt-1'>
+      {session.user?.email ? maskEmail(session.user?.email) : ""}
+    </p>
+  </span>
+</MenubarItem>
+
+
         
           <MenubarSeparator className='bg-gray-500' />
           <div className="pl-3 text-[9px] text-profile my-3 flex flex-wrap gap-2 py-0 ">
@@ -103,5 +126,6 @@ function Usermenu() {
   </div>
   )
 }
+
 
 export default Usermenu

@@ -20,6 +20,7 @@ function Navbar({
     if (e.key === "Enter" && query.trim()) {
       router.push(`/search?q=${encodeURIComponent(query.trim())}`);
     }
+    
   };
 
   return (
