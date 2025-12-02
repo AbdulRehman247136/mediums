@@ -27,3 +27,34 @@ export async function GET(
     return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }
+
+
+
+//Get Single Delete
+export async function DELETE(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params;
+
+    await connectDB();
+
+    const deletedPost = await Post.findByIdAndDelete(id);
+
+    if (!deletedPost) {
+      return NextResponse.json(
+        { message: "Post not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: "Post deleted successfully", deletedPost },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  }
+}
