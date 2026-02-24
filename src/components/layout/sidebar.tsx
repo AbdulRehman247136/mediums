@@ -37,10 +37,11 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-
-        "h-min-screen bg-background border-r-2 border-border flex flex-col justify-between transition-[width] duration-700 ease-in-out overflow-hidden hover:bg-muted/10  border-gray-300",
+        "bg-background border-r-2 border-border flex flex-col justify-between transition-all duration-300 ease-in-out overflow-hidden hover:bg-muted/10 border-gray-300",
+        "fixed inset-y-0 left-0 z-50 md:relative md:flex md:h-screen",
+        isMobile ? (collapsed ? "-translate-x-full" : "translate-x-0 w-64") : (collapsed ? "w-20" : "w-64"),
+        !isMobile && "h-screen"
       )}
-
       aria-label="Sidebar"
     >
       {/* Top section (logo + nav) */}

@@ -25,7 +25,7 @@ export default function RightSideBar() {
   const cleanText = (html: string) => html.replace(/<[^>]+>/g, "").slice(0, 50) + "...";
 
   return (
-    <div className="h-screen border-l border-gray-300 p-5">
+    <div className="min-h-screen border-l border-gray-300 p-5">
       <h1 className="text-lg font-semibold mb-4">Most Viewed</h1>
       <div className="space-y-4">
         {topPosts.map((post) => (

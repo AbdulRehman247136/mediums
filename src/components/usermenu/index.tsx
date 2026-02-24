@@ -34,7 +34,7 @@ function Usermenu() {
 
 
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-2 md:gap-8">
       {status === "loading" ? (
         <div className="flex items-center"> <TypingText
           text={["Loading..."]}
