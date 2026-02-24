@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 
@@ -29,6 +30,7 @@ interface DropdownChildProps {
 // Menu container that controls open/close state
 const MenubarMenu = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = React.useState(false)
+  const pathname = usePathname()
   const menuRef = React.useRef<HTMLDivElement>(null)
 
   // Close when clicking outside
@@ -41,6 +43,11 @@ const MenubarMenu = ({ children }: { children: React.ReactNode }) => {
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
+
+  // Close on navigation
+  React.useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <div ref={menuRef} className="relative inline-block">

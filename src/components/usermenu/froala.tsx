@@ -136,8 +136,8 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
               "image.error": function (error: unknown) {
                 console.error("❌ Image upload failed:", error);
               },
-
             },
+          }}
         />
       </div>
 
@@ -147,8 +147,8 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
           onClick={handlePublish}
           disabled={!content.trim()}
           className={`px-6 py-2 rounded-full font-medium transition-all ${content.trim()
-            ? "bg-green-600 text-white hover:bg-green-700 shadow-md"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              ? "bg-green-600 text-white hover:bg-green-700 shadow-md"
+              : "bg-gray-200 text-gray-400 cursor-not-allowed"
             }`}
         >
           Publish
