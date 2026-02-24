@@ -87,7 +87,7 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
   if (status === "loading") return <p>Loading session...</p>;
 
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col gap-4">
+    <div className="w-full max-w-4xl mx-auto flex flex-col gap-4 px-4 md:px-6 py-6 transition-all">
       {/* 📝 Froala Editor */}
       <div className="border rounded-md p-2 shadow-sm">
         <FroalaEditorComponent
@@ -101,7 +101,7 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
             imageUploadURL: "/api/upload", // ✅ Cloudinary upload API
             imageUploadMethod: "POST",
             imageAllowedTypes: ["jpeg", "jpg", "png"],
-            imageMaxSize: 7 * 1024 * 1024, 
+            imageMaxSize: 7 * 1024 * 1024,
             toolbarButtons: [
               "bold",
               "italic",
@@ -128,7 +128,7 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
               "image.alignCenter": function ($img: JQuery<HTMLImageElement>) {
                 $img.removeClass("float-left float-right").addClass("mx-auto block");
               },
-        
+
               // ✅ Optional: image insert + error handlers
               "image.inserted": function ($img: JQuery<HTMLImageElement>) {
                 console.log("✅ Image inserted:", $img[0].src);
@@ -136,22 +136,20 @@ const FroalaEditor: React.FC<FroalaEditorProps> = ({ onTypingStatusChange }) => 
               "image.error": function (error: unknown) {
                 console.error("❌ Image upload failed:", error);
               },
-              
+
             },
-          }}
         />
       </div>
 
       {/* 🚀 Publish Button */}
-      <div className="flex justify-end">
+      <div className="flex justify-end pt-2">
         <button
           onClick={handlePublish}
           disabled={!content.trim()}
-          className={`px-5 py-2 rounded-lg transition-all ${
-            content.trim()
-              ? "bg-green-600 text-white hover:bg-green-700"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
+          className={`px-6 py-2 rounded-full font-medium transition-all ${content.trim()
+            ? "bg-green-600 text-white hover:bg-green-700 shadow-md"
+            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+            }`}
         >
           Publish
         </button>

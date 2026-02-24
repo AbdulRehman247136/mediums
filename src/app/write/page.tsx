@@ -15,10 +15,10 @@ function Write() {
 
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Uppernav2 typingStatus={typingStatus} />
 
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex flex-col">
         <FroalaEditor onTypingStatusChange={setTypingStatus} />
       </div>
     </div>
