@@ -49,7 +49,7 @@ const PostList = () => {
 
   if (loading)
     return (
-      <p className="text-center mt-10">
+      <div className="text-center mt-10">
         <TypingText
           text={["Loading posts..."]}
           typingSpeed={75}
@@ -60,12 +60,12 @@ const PostList = () => {
           textColors={["black"]}
           variableSpeed={{ min: 50, max: 120 }}
         />
-      </p>
+      </div>
     );
 
   if (posts.length === 0)
     return (
-      <p className="text-center mt-10 text-gray-500">
+      <div className="text-center mt-10 text-gray-500">
         <TypingText
           text={["No posts available."]}
           typingSpeed={75}
@@ -76,7 +76,7 @@ const PostList = () => {
           textColors={["black"]}
           variableSpeed={{ min: 50, max: 120 }}
         />
-      </p>
+      </div>
     );
 
   return (

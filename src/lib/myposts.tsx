@@ -42,8 +42,7 @@ const MyPost = () => {
     fetchPosts();
   }, []);
 
-  if (loading) return <p className="text-center mt-10">
-
+  if (loading) return <div className="text-center mt-10">
     <TypingText
       text={["Loading posts..."]}
       typingSpeed={75}
@@ -53,10 +52,10 @@ const MyPost = () => {
       className="text-4xl font-bold"
       textColors={['black']}
       variableSpeed={{ min: 50, max: 120 }}
-    /></p>;
+    /></div>;
 
   if (posts.length === 0)
-    return <p className="text-center mt-10 text-gray-500"> <TypingText
+    return <div className="text-center mt-10 text-gray-500"> <TypingText
       text={["No posts available."]}
       typingSpeed={75}
       pauseDuration={1500}
@@ -65,7 +64,7 @@ const MyPost = () => {
       className="text-4xl font-bold"
       textColors={['black']}
       variableSpeed={{ min: 50, max: 120 }}
-    /></p>;
+    /></div>;
 
   return (
     <div className="w-full max-w-3xl mx-auto mt-6 space-y-6">
