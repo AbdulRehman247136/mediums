@@ -11,7 +11,7 @@ interface Post {
   content: string;
   author?: string;
   createdAt?: string;
-  claps?: number; 
+  claps?: number;
   userId: {
     name?: string;
     image?: string;
@@ -44,70 +44,70 @@ const MyPost = () => {
 
   if (loading) return <p className="text-center mt-10">
 
-  <TypingText
-    text={["Loading posts..."]}
-    typingSpeed={75}
-    pauseDuration={1500}
-    showCursor={true}
-    cursorCharacter="|"
-    className="text-4xl font-bold"
-    textColors={['black']}
-    variableSpeed={{ min: 50, max: 120 }}
-  /></p>;
+    <TypingText
+      text={["Loading posts..."]}
+      typingSpeed={75}
+      pauseDuration={1500}
+      showCursor={true}
+      cursorCharacter="|"
+      className="text-4xl font-bold"
+      textColors={['black']}
+      variableSpeed={{ min: 50, max: 120 }}
+    /></p>;
 
   if (posts.length === 0)
     return <p className="text-center mt-10 text-gray-500"> <TypingText
-  text={["No posts available."]}
-  typingSpeed={75}
-  pauseDuration={1500}
-  showCursor={true}
-  cursorCharacter="|"
-  className="text-4xl font-bold"
-  textColors={['black']}
-  variableSpeed={{ min: 50, max: 120 }}
-/></p>;
+      text={["No posts available."]}
+      typingSpeed={75}
+      pauseDuration={1500}
+      showCursor={true}
+      cursorCharacter="|"
+      className="text-4xl font-bold"
+      textColors={['black']}
+      variableSpeed={{ min: 50, max: 120 }}
+    /></p>;
 
   return (
     <div className="w-full max-w-3xl mx-auto mt-6 space-y-6">
-{posts.map((post) => (
-  <div
-    key={post._id}
-    className="border p-4 rounded-lg shadow-sm bg-white hover:shadow-md transition-all"
-  >
-    <img
-      src={post?.userId?.image}
-      alt="User"
-      className="w-7 h-7 rounded-full object-cover"
-    />
+      {posts.map((post) => (
+        <div
+          key={post._id}
+          className="border p-4 rounded-lg shadow-sm bg-white hover:shadow-md transition-all"
+        >
+          <img
+            src={post?.userId?.image}
+            alt="User"
+            className="w-7 h-7 rounded-full object-cover"
+          />
 
-    <div
-      className="prose prose-gray max-w-none mt-2 gap-2.5"
-      dangerouslySetInnerHTML={{ __html: post.content }}
-    />
+          <div
+            className="prose prose-gray max-w-none mt-2 gap-2.5"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
-    <p className="text-sm text-gray-500 mt-3">
-      {post.userId?.name}
-    </p>
+          <p className="text-sm text-gray-500 mt-3">
+            {post.userId?.name}
+          </p>
 
-    <p className="text-xs text-gray-400">
-      {post.createdAt
-        ? new Date(post.createdAt).toLocaleDateString("en-GB", {
-            timeZone: "UTC",
-          })
-        : ""}
-    </p>
+          <p className="text-xs text-gray-400">
+            {post.createdAt
+              ? new Date(post.createdAt).toLocaleDateString("en-GB", {
+                timeZone: "UTC",
+              })
+              : ""}
+          </p>
 
-    <div className="mt-3">
-      <ClapButton postId={post._id} initialClaps={post.claps ?? 0} />
-    </div>
+          <div className="mt-3">
+            <ClapButton postId={post._id} initialClaps={post.claps ?? 0} />
+          </div>
 
-    {/* ✅ Delete Button placed correctly */}
-    <div className="mt-3">
-      <DeletePostButton id={post._id} />
-    </div>
-  </div>
-  
-))};
+          {/* ✅ Delete Button placed correctly */}
+          <div className="mt-3">
+            <DeletePostButton id={post._id} />
+          </div>
+        </div>
+
+      ))}
     </div>
   );
 };

@@ -8,16 +8,22 @@ export async function GET() {
 
     const posts = await Post.find({}, "views createdAt").sort({ createdAt: 1 });
 
-    // ✅ Format for chart (date + views)
-    const chartData = posts.map((post) => ({
-      date: new Date(post.createdAt).toLocaleDateString("en-US", {
+    // ✅ Aggregate views by date
+    const aggregatedData: Record<string, number> = {};
+    posts.forEach((post) => {
+      const date = new Date(post.createdAt).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
-      }),
-      views: post.views || 0,
+      });
+      aggregatedData[date] = (aggregatedData[date] || 0) + (post.views || 0);
+    });
+
+    const chartData = Object.entries(aggregatedData).map(([date, views]) => ({
+      date,
+      views,
     }));
-  
-    
+
+
     return NextResponse.json(chartData);
   } catch (error) {
     console.error("Error fetching chart data:", error);
