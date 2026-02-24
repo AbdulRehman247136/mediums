@@ -27,43 +27,37 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [collapsed]);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       {/* Backdrop for mobile */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/60 z-[90] md:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
-      {/* Left Sidebar */}
+      {/* Sidebar - Single instance */}
       <Sidebar
-        collapsed={!mobileMenuOpen} // In mobile, "collapsed" means hidden
-        isMobile={true}
+        mobileOpen={mobileMenuOpen}
+        desktopCollapsed={collapsed}
         onCloseMobile={() => setMobileMenuOpen(false)}
       />
 
-      {/* Desktop Sidebar (Optional, if we want separate desktop sidebar) */}
-      <div className="hidden md:block">
-        <Sidebar collapsed={collapsed} isMobile={false} />
-      </div>
-
-      {/* Main Content + Right Sidebar */}
-      <div className="flex flex-1 flex-col transition-all duration-300 ease-in-out">
-        {/* Navbar */}
+      {/* Main Content Area */}
+      <div className="flex flex-1 flex-col min-w-0 transition-all duration-300">
         <Navbar
           collapsed={collapsed}
           setCollapsed={setCollapsed}
           onOpenMobile={() => setMobileMenuOpen(true)}
         />
 
-        {/* Main content area with right sidebar */}
-        <div className="flex flex-1">
-          {/* Page content */}
-          <main className="flex-1 p-4 w-full overflow-x-hidden">{children}</main>
+        <div className="flex flex-1 overflow-hidden">
+          <main className="flex-1 p-4 w-full overflow-x-hidden overflow-y-auto bg-white">
+            {children}
+          </main>
 
           {/* Right Sidebar */}
-          <aside className="w-72 hidden lg:block p-4">
+          <aside className="w-72 hidden lg:block border-l border-gray-200 bg-white">
             <RightSideBar />
           </aside>
         </div>

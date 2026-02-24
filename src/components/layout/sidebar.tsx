@@ -26,21 +26,21 @@ const NAV: NavItem[] = [
 ];
 
 export default function Sidebar({
-  collapsed,
+  mobileOpen,
+  desktopCollapsed,
   onCloseMobile,
-  isMobile,
 }: {
-  collapsed: boolean;
-  isMobile?: boolean;
+  mobileOpen: boolean;
+  desktopCollapsed: boolean;
   onCloseMobile?: () => void;
 }) {
   return (
     <aside
       className={cn(
-        "bg-background border-r-2 border-border flex flex-col justify-between transition-all duration-300 ease-in-out overflow-hidden hover:bg-muted/10 border-gray-300",
-        "fixed inset-y-0 left-0 z-50 md:relative md:flex md:h-screen",
-        isMobile ? (collapsed ? "-translate-x-full" : "translate-x-0 w-64") : (collapsed ? "w-20" : "w-64"),
-        !isMobile && "h-screen"
+        "bg-white border-r border-border flex flex-col justify-between transition-all duration-300 ease-in-out overflow-hidden border-gray-200",
+        "fixed inset-y-0 left-0 z-[100] md:relative md:flex md:h-screen",
+        mobileOpen ? "translate-x-0 w-64 shadow-2xl" : "-translate-x-full md:translate-x-0",
+        desktopCollapsed ? "md:w-20" : "md:w-64"
       )}
       aria-label="Sidebar"
     >
@@ -50,12 +50,12 @@ export default function Sidebar({
           <div
             className={cn(
               "flex-shrink-0 rounded-md flex items-center justify-center px-6",
-              collapsed ? "w-1 h-10" : "w-12 h-12"
+              desktopCollapsed && !mobileOpen ? "w-1 h-10" : "w-12 h-12"
             )}
           >
             <span className="text-2xl font-bold px-3">M</span>
           </div>
-          {!collapsed && (
+          {(!desktopCollapsed || mobileOpen) && (
             <h2 className="text-lg text-black font-semibold">Medium</h2>
           )}
         </div>
@@ -69,14 +69,14 @@ export default function Sidebar({
                   <li >
                     <Link
                       href={item.href}
-                      onClick={() => isMobile && onCloseMobile?.()}
+                      onClick={() => onCloseMobile?.()}
                       className={cn(
                         "flex items-center gap-5 text-foreground rounded-md px-3 py-2 hover:bg-muted/10 transition-colors hover:text-black text-sidebar",
-                        collapsed ? "justify-center" : "justify-start"
+                        desktopCollapsed && !mobileOpen ? "justify-center" : "justify-start"
                       )}
                     >
                       <Icon className="w-5 h-10" />
-                      {!collapsed && (
+                      {(!desktopCollapsed || mobileOpen) && (
                         <span className="text-sm font-medium">{item.label}</span>
                       )}
                     </Link>
@@ -95,14 +95,12 @@ export default function Sidebar({
       <div className="mb-[1vh] px-2">
         <button
           className={cn(
-            "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semiboldhover:text-black text-sidebar ",
-            collapsed ? "justify-center" : "justify-start"
+            "w-full flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/10 transition-colors text-foreground cursor-pointer font-semibold hover:text-black text-sidebar ",
+            desktopCollapsed && !mobileOpen ? "justify-center" : "justify-start"
           )}
         >
-
-
           <FaSignOutAlt className="w-5 h-10" />
-          {!collapsed && <span className="text-sm">Sign out</span>}
+          {(!desktopCollapsed || mobileOpen) && <span className="text-sm">Sign out</span>}
         </button>
       </div>
     </aside>
